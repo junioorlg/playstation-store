@@ -1,0 +1,57 @@
+i{
+	cursor: pointer;
+}
+
+.hidden { display: none }
+
+.box-header h1{
+	color: #fff
+}
+.box-articles {
+	padding: 10px;
+	border-radius: 10px;
+}
+.box-articles .panel{
+    float: right;
+    display: none;
+}
+
+.box-form{
+	border-radius: 10px;
+	margin-top: 15px;
+	padding-top: 15px !important;
+}
+button#reset-form{
+    height: 30px;
+    line-height: 0px;
+    padding: 0 0.7rem;
+    margin-left: 15px;
+    font-size: 12px;
+}
+.margin-bottom {	margin-bottom: 20px }
+.input-field label {
+ color: #000;
+}
+
+.input-field input[type=text]:focus + label {
+ color: #000;
+}
+
+.input-field input[type=text]:focus {
+ border-bottom: 1px solid #000;
+ box-shadow: 0 1px 0 0 #000;
+}
+
+.input-field input[type=text].valid {
+ border-bottom: 1px solid #000;
+ box-shadow: 0 1px 0 0 #000;
+}
+
+.input-field input[type=text].invalid {
+ border-bottom: 1px solid #000;
+ box-shadow: 0 1px 0 0 #000;
+}
+
+.input-field .prefix.active {
+ color: #000;
+}

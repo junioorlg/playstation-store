@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>List of items</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/stylesheets.css">
+</head>
+<body class="blue darken-3">
+	<div class="">
+		<div class="row boxHeader">
+			<div class="col l8 offset-l2 center-align">
+				<h1>PlayStation Network</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col l6 offset-l1 games-container">
+				
+			</div>
+			<div class="boxForm col l3 offset-l1 white">
+				<form action="" name="formGame" id="formGame">
+					<div class="row">
+						<div class="col l12 center-align">
+							<b id="titleForm">ADD NEW GAME</b>
+						</div>
+						<div class="col l12 input-field">
+							<input id="title" type="text" name="title" class="validate">
+							<label for="title">Title</label>
+						</div>
+						<div class="col l12 input-field">
+							<input id="description" type="text" name="description" class="validate">
+							<label for="description">Description</label>
+						</div>
+							<div class="col l12 file-field input-field marginBottom">
+						  <div class="btn blue darken-3">
+						    <span>Image</span>
+						    <input id="img" type="file" accept="image/x-png, image/gif, image/jpeg">
+						  </div>
+						  <div class="file-path-wrapper">
+						    <input id="txtImg" class="file-path validate" type="text" name="img">
+						  </div>
+						</div>
+						<div class="col l8 offset-l4 left-align">
+							<button id="add" class="btn blue darken-3 waves-effect waves-light" type="button" name="action">ADD</button>
+							<button id="edit" class="btn blue darken-3 waves-effect waves-light hidden" type="button" name="action">EDIT</button>
+							<button id="resetForm" class="btn red waves-effect waves-light" type="reset">CANCEL</button>
+							<input type="hidden" id="editId" value="">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="template/text" id="gamesTpl">
+		<ul id="sortable1" class="connectedSortable">
+			{{#games}}
+				<li id="{{ id }}" class="game">
+					<div class="row boxArticles white">
+						<div class="col l2 imgArticles">
+							<img class="responsive-img" src="{{ img }}" alt="">
+						</div>
+						<div class="col l10 descriptionArticles">
+							<div class="panel">
+								<i class="small material-icons showEdit">mode_edit</i>
+								<i class="small material-icons delete">delete</i>
+			 				</div>
+			 				<b>{{  title  }}</b>
+							<p>{{  description  }}</p>
+			 			</div>
+			 		</div>
+				</li>
+			{{/games}}
+		<ul>
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+	<script src="js/mustache.js"></script>
+	<script src="js/games_controller.js"></script>
+</body>
+</html>
