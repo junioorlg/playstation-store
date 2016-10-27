@@ -9,7 +9,7 @@
 </head>
 <body class="blue darken-3">
 	<div class="">
-		<div class="row boxHeader">
+		<div class="row box-header">
 			<div class="col l8 offset-l2 center-align">
 				<h1>PlayStation Network</h1>
 			</div>
@@ -18,7 +18,7 @@
 			<div class="col l6 offset-l1 games-container">
 				
 			</div>
-			<div class="boxForm col l3 offset-l1 white">
+			<div class="box-form col l3 offset-l1 white">
 				<form action="" name="formGame" id="formGame">
 					<div class="row">
 						<div class="col l12 center-align">
@@ -44,7 +44,7 @@
 						<div class="col l8 offset-l4 left-align">
 							<button id="add" class="btn blue darken-3 waves-effect waves-light" type="button" name="action">ADD</button>
 							<button id="edit" class="btn blue darken-3 waves-effect waves-light hidden" type="button" name="action">EDIT</button>
-							<button id="resetForm" class="btn red waves-effect waves-light" type="reset">CANCEL</button>
+							<button id="reset-form" class="btn red waves-effect waves-light" type="reset">CANCEL</button>
 							<input type="hidden" id="editId" value="">
 						</div>
 					</div>
@@ -56,13 +56,13 @@
 		<ul id="sortable1" class="connectedSortable">
 			{{#games}}
 				<li id="{{ id }}" class="game">
-					<div class="row boxArticles white">
+					<div class="row box-articles white">
 						<div class="col l2 imgArticles">
 							<img class="responsive-img" src="{{ img }}" alt="">
 						</div>
 						<div class="col l10 descriptionArticles">
 							<div class="panel">
-								<i class="small material-icons showEdit">mode_edit</i>
+								<i class="small material-icons show-edit">mode_edit</i>
 								<i class="small material-icons delete">delete</i>
 			 				</div>
 			 				<b>{{  title  }}</b>

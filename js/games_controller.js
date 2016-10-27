@@ -18,7 +18,7 @@ var games_controller = games_controller || (function () {
             $("#add").on("click", self.addGame)
 
             // Enable show edit game 
-            $(".showEdit").on("click", self.showEditGame)
+            $(".show-edit").on("click", self.showEditGame)
 
             // Enable edit game
             $("#edit").on("click", self.editGame)
@@ -27,7 +27,7 @@ var games_controller = games_controller || (function () {
             $(".delete").on("click", self.deleteGame)
 
             // Enable reset form
-            $("#resetForm").on("click", self.resetForm)
+            $("#reset-form").on("click", self.resetForm)
         },
 
         activeSorting: function(){
