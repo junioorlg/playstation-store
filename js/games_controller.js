@@ -33,7 +33,12 @@ var games_controller = games_controller || (function () {
         activeSorting: function(){
 
             $("#sortable1").sortable({
-                connectWith: ".connectedSortable"
+                stop: function(e, ui) {
+                    $('.game').each(function(i){
+                        $(this).attr("data-order", i)
+                    });
+                    self.listOrder();
+                }
             }).disableSelection();
 
             $('.ui-sortable-handle')
@@ -44,6 +49,19 @@ var games_controller = games_controller || (function () {
                     $(this).find(".panel").hide();
                 });
                 
+        },
+
+        listOrder: function(){
+            var collection = self.getCollection();
+            for (j in collection){
+                $('.game').each(function(i){
+                    if(collection[j].id == $(this).attr("id")){
+                        collection[j].order = $(this).attr("data-order");
+                    }
+                });
+            }        
+
+            self.updateCollection(collection)
         },
 
         getCollection: function() {
@@ -61,19 +79,22 @@ var games_controller = games_controller || (function () {
                     "id" : "1",
                     "img" : "media/horizon.jpg",
                     "title" : "Horizon",
-                    "description" : "Este es el juego Horizon"
+                    "description" : "Este es el juego Horizon",
+                    "order" : 1
                 },
                 {
                     "id" : "2",
                     "img" : "media/division.jpg",
                     "title" : "The division",
-                    "description" : "Este es el juego The division"
+                    "description" : "Este es el juego The division",
+                    "order" : 2
                 },
                 {
                     "id" : "3",
                     "img" : "media/fifa17.jpg",
                     "title" : "Fifa 17",
-                    "description" : "Este es el juego Fifa 17"
+                    "description" : "Este es el juego Fifa 17",
+                    "order" : 3
                 }
             ]
 
@@ -93,8 +114,11 @@ var games_controller = games_controller || (function () {
 
             self.resetForm()
             self.saveImgGame()
-            setTimeout(self.updateCollection(collection),40000)
-            self.renderList()
+            setTimeout(function(){
+                self.updateCollection(collection)
+                self.renderList()
+                self.activeSorting()
+            }, 500)
 
             $('#formGame')[0].reset()
         },
@@ -167,9 +191,12 @@ var games_controller = games_controller || (function () {
             
             self.resetForm()
             $('#formGame')[0].reset();
-            self.updateCollection(collection)
-            self.renderList()
 
+            setTimeout(function(){
+                self.updateCollection(collection)
+                self.renderList()
+                self.activeSorting()
+            }, 500)
         },
 
         deleteGame:function(){
@@ -184,6 +211,7 @@ var games_controller = games_controller || (function () {
             
             self.updateCollection(collection)
             self.renderList()
+            self.activeSorting()
         },
 
         resetForm: function(){
