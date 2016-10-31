@@ -37,7 +37,13 @@ span.error {
 	display: block;
 	color: red;
 }
-
+#available-games {
+	margin-top: -22px;
+	color: #fff;
+}
+#available-games span {
+	font-weight: bold;
+}
 .input-field label {
  color: #000;
 }

@@ -281,11 +281,14 @@ var games_controller = games_controller || (function () {
 
         renderList: function() {
 
-            data = self.orderList(this.getCollection(), "order")
+            data = self.orderList(this.getCollection(), "order"),
+            dataLength = Object.keys(data).length
 
             $(".games-container").html(
                 Mustache.to_html(_tpl, {games: data})
             )
+
+            $('#available-games span').html(dataLength);
         }
     }
 }());

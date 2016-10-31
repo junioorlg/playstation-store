@@ -39,7 +39,7 @@
 						  </div>
 						  <div class="file-path-wrapper">
 						    <input id="txtImg" class="file-path validate" type="text" name="img">
-						    <span class="error hidden">Error: solo imagenes jpgs, png, gif (320px x 320px)</span>
+						    <span class="error hidden">Error: Only images format: jpgs, png, gif (320px x 320px)</span>
 						  </div>
 						</div>
 						<div class="col l8 offset-l4 left-align">
@@ -54,6 +54,7 @@
 		</div>
 	</div>
 	<script type="template/text" id="gamesTpl">
+	<p id="available-games" style="margin-top: -22px">Games available: <span></span></p>
 		<ul id="sortable1" class="connectedSortable">
 			{{#games}}
 				<li id="{{ id }}" class="game" data-order="{{ order }}">
