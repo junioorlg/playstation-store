@@ -97,7 +97,6 @@ var games_controller = games_controller || (function () {
             if(JSON.parse(localStorage.getItem('games'))==null)
                 self.saveCollection()
 
-            //console.log(JSON.parse(localStorage.getItem('games')));
             return JSON.parse(localStorage.getItem('games'))
         },
 
