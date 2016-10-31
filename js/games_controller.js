@@ -38,6 +38,7 @@ var games_controller = games_controller || (function () {
             $("#img").change(self.imgValid)
         },
 
+        // valid the format of image should be jpg, png or gif . max width 320px and max height 320px.
         imgValid: function(){
             var file, img, _URL = window.URL || window.webkitURL;
 
@@ -59,6 +60,7 @@ var games_controller = games_controller || (function () {
             }
         },
 
+        // Enable sorting list
         activeSorting: function(){
 
             $("#sortable1").sortable({
@@ -79,7 +81,7 @@ var games_controller = games_controller || (function () {
                 });
                 
         },
-
+        // Enable order list
         listOrder: function(){
             var collection = self.getCollection();
             for (j in collection){
@@ -92,14 +94,14 @@ var games_controller = games_controller || (function () {
 
             self.updateCollection(collection)
         },
-
+        // get json collection
         getCollection: function() {
             if(JSON.parse(localStorage.getItem('games'))==null)
                 self.saveCollection()
 
             return JSON.parse(localStorage.getItem('games'))
         },
-
+        // json for default
         saveCollection: function() {
 
             var newCollection = [
@@ -131,6 +133,7 @@ var games_controller = games_controller || (function () {
             return self.getCollection()
         },
 
+        // add new game, push a json in localstorage
         addGame: function() {
             if( self.validForm() == false)
                 return false;
@@ -152,7 +155,7 @@ var games_controller = games_controller || (function () {
 
             $('#formGame')[0].reset()
         },
-
+        // valid form
         validForm: function(){
             var title =  $("#title"),
                 description = $('#description'),
@@ -168,7 +171,7 @@ var games_controller = games_controller || (function () {
                 return false;
             }
         },
-
+        // get new game in json of the form
         getNewGame: function() {
             return {
                 "id" :  new Date().getUTCMilliseconds(),
@@ -177,12 +180,11 @@ var games_controller = games_controller || (function () {
                 "description" : $("#description").val()
             }
         },
-
+        // set json in localstorage
         updateCollection: function(col) {
             localStorage.setItem('games', JSON.stringify(col));
         },
-
-
+        // save img after of that validation pass. here i use PHP for img save.
         saveImgGame: function () {
             var file_data = $('#img').prop('files')[0];
             var form_data = new FormData();                  
@@ -200,7 +202,7 @@ var games_controller = games_controller || (function () {
                 }
              });
         },
-        
+        // obtain a game for edit
         showEditGame: function(){
             var idGame = $(this).parents(".game").attr("id"),
                 collection = self.getCollection();
@@ -219,7 +221,7 @@ var games_controller = games_controller || (function () {
                 }
             }
         },
-
+        // edit game in localstorage
         editGame: function(){
             if( self.validForm() == false)
                 return false;
@@ -247,7 +249,7 @@ var games_controller = games_controller || (function () {
                 self.activeSorting()
             }, 500)
         },
-
+        // delete game in localstorage
         deleteGame:function(){
             var idGame = $(this).parents(".game").attr("id"),
                 collection = self.getCollection();
@@ -262,14 +264,14 @@ var games_controller = games_controller || (function () {
             self.renderList()
             self.activeSorting()
         },
-
+        // reset form after of send the form o clean up the form
         resetForm: function(){
             $("#titleForm").html("ADD NEW GAME")
             $("#edit").hide()
             $("#add").show()
             $('label[for="title"],label[for="description"]').removeClass('active')
         },
-
+        // reset form after of send the form o clean up the form
         orderList: function (data, key) {
             return data.sort(function (a, b) {
                 var x = a[key];
@@ -277,7 +279,7 @@ var games_controller = games_controller || (function () {
                 return ((x < y) ? -1 : ((x > y) ? 1 : 0));
             });
         },
-
+        // show, order and count the games of localstorage.
         renderList: function() {
 
             data = self.orderList(this.getCollection(), "order"),
@@ -288,6 +290,12 @@ var games_controller = games_controller || (function () {
             )
 
             $('#available-games span').html(dataLength);
+
+            // Enable show edit game 
+            $(".show-edit").on("click", self.showEditGame)
+
+            // Enable delete game
+            $(".delete").on("click", self.deleteGame)
         }
     }
 }());
