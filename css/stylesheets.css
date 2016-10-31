@@ -3,6 +3,7 @@ i{
 }
 
 .hidden { display: none }
+span.hidden { display: none !important }
 
 .box-header h1{
 	color: #fff
@@ -29,6 +30,14 @@ button#reset-form{
     font-size: 12px;
 }
 .margin-bottom {	margin-bottom: 20px }
+
+span.error {
+	margin-top: -15px;
+	margin-bottom: 15px;
+	display: block;
+	color: red;
+}
+
 .input-field label {
  color: #000;
 }
@@ -54,4 +63,13 @@ button#reset-form{
 
 .input-field .prefix.active {
  color: #000;
+}
+
+.input-field.error label {
+ color: red;
+}
+
+.input-field.error input[type=text] {
+ border-bottom: 1px solid red;
+ box-shadow: 0 1px 0 0 red;
 }

@@ -28,6 +28,35 @@ var games_controller = games_controller || (function () {
 
             // Enable reset form
             $("#reset-form").on("click", self.resetForm)
+
+            // Delete class error for inputs
+            $("#title, #description").keypress(function(){
+                if ($(this).parent().hasClass('error'))
+                    $(this).parent().removeClass('error')
+            })
+
+            $("#img").change(self.imgValid)
+        },
+
+        imgValid: function(){
+            var file, img, _URL = window.URL || window.webkitURL;
+
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function() {
+                    $("#txtImg").parents(".input-field").removeClass('error')
+                    $("span.error").addClass("hidden")
+                    if (this.width >= 320 || this.height >= 320){
+                        $("#txtImg").val("")
+                        $("span.error").removeClass("hidden")
+                        $("#txtImg").parents(".input-field").addClass('error')
+                    }
+                };
+                img.onerror = function() {
+                    alert( "not a valid file: " + file.type);
+                };
+                img.src = _URL.createObjectURL(file);
+            }
         },
 
         activeSorting: function(){
@@ -104,6 +133,8 @@ var games_controller = games_controller || (function () {
         },
 
         addGame: function() {
+            if( self.validForm() == false)
+                return false;
 
             var newGame = self.getNewGame()
 
@@ -121,6 +152,22 @@ var games_controller = games_controller || (function () {
             }, 500)
 
             $('#formGame')[0].reset()
+        },
+
+        validForm: function(){
+            var title =  $("#title"),
+                description = $('#description'),
+                txtImg = $('#txtImg');
+
+            if( title.val() == "" || description.val() == "" || txtImg.val() == ""){
+                if (title.val() == "")
+                    title.parent().addClass("error")
+                if (description.val() == "")
+                    description.parent().addClass("error")
+                if (txtImg.val() == "")
+                    txtImg.parents(".input-field").addClass("error")
+                return false;
+            }
         },
 
         getNewGame: function() {
@@ -175,6 +222,9 @@ var games_controller = games_controller || (function () {
         },
 
         editGame: function(){
+            if( self.validForm() == false)
+                return false;
+
             var idGame = $("#editId").val(),
                 collection = self.getCollection();
             
@@ -221,9 +271,18 @@ var games_controller = games_controller || (function () {
             $('label[for="title"],label[for="description"]').removeClass('active')
         },
 
+        orderList: function (data, key) {
+            return data.sort(function (a, b) {
+                var x = a[key];
+                var y = b[key];
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });
+        },
+
         renderList: function() {
-            
-            var data = this.getCollection()
+
+            data = self.orderList(this.getCollection(), "order")
+
             $(".games-container").html(
                 Mustache.to_html(_tpl, {games: data})
             )
